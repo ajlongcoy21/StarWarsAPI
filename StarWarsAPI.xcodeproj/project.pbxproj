@@ -15,6 +15,15 @@
 		9B5CA5FE210503A400808615 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B5CA5FC210503A400808615 /* LaunchScreen.storyboard */; };
 		9B5CA609210503A400808615 /* StarWarsAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5CA608210503A400808615 /* StarWarsAPITests.swift */; };
 		9B5CA614210503A400808615 /* StarWarsAPIUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5CA613210503A400808615 /* StarWarsAPIUITests.swift */; };
+		9B5CA623210504DB00808615 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5CA622210504DB00808615 /* Endpoint.swift */; };
+		9B5CA62621050F6B00808615 /* JSONDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5CA62521050F6B00808615 /* JSONDownloader.swift */; };
+		9B5CA6282105102F00808615 /* StarWarsAPIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5CA6272105102F00808615 /* StarWarsAPIError.swift */; };
+		9B5CA62A2105119A00808615 /* StarWarsAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5CA6292105119A00808615 /* StarWarsAPIClient.swift */; };
+		9B5CA62C2105132700808615 /* People.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5CA62B2105132700808615 /* People.swift */; };
+		9B5CA62E21051CA200808615 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5CA62D21051CA200808615 /* Person.swift */; };
+		9B5CA63021053D5D00808615 /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5CA62F21053D5D00808615 /* Vehicle.swift */; };
+		9B5CA63221053DFA00808615 /* Vehicles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5CA63121053DFA00808615 /* Vehicles.swift */; };
+		9B5CA6362105422300808615 /* Starships.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5CA6352105422300808615 /* Starships.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +58,15 @@
 		9B5CA60F210503A400808615 /* StarWarsAPIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StarWarsAPIUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B5CA613210503A400808615 /* StarWarsAPIUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarWarsAPIUITests.swift; sourceTree = "<group>"; };
 		9B5CA615210503A400808615 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9B5CA622210504DB00808615 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		9B5CA62521050F6B00808615 /* JSONDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDownloader.swift; sourceTree = "<group>"; };
+		9B5CA6272105102F00808615 /* StarWarsAPIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarWarsAPIError.swift; sourceTree = "<group>"; };
+		9B5CA6292105119A00808615 /* StarWarsAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarWarsAPIClient.swift; sourceTree = "<group>"; };
+		9B5CA62B2105132700808615 /* People.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = People.swift; sourceTree = "<group>"; };
+		9B5CA62D21051CA200808615 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		9B5CA62F21053D5D00808615 /* Vehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
+		9B5CA63121053DFA00808615 /* Vehicles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicles.swift; sourceTree = "<group>"; };
+		9B5CA6352105422300808615 /* Starships.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Starships.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +97,8 @@
 		9B5CA5E4210503A300808615 = {
 			isa = PBXGroup;
 			children = (
+				9B5CA62421050F5700808615 /* Networking */,
+				9B5CA621210504C300808615 /* Models */,
 				9B5CA5EF210503A300808615 /* StarWarsAPI */,
 				9B5CA607210503A400808615 /* StarWarsAPITests */,
 				9B5CA612210503A400808615 /* StarWarsAPIUITests */,
@@ -126,6 +146,29 @@
 				9B5CA615210503A400808615 /* Info.plist */,
 			);
 			path = StarWarsAPIUITests;
+			sourceTree = "<group>";
+		};
+		9B5CA621210504C300808615 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9B5CA622210504DB00808615 /* Endpoint.swift */,
+				9B5CA62B2105132700808615 /* People.swift */,
+				9B5CA62D21051CA200808615 /* Person.swift */,
+				9B5CA62F21053D5D00808615 /* Vehicle.swift */,
+				9B5CA63121053DFA00808615 /* Vehicles.swift */,
+				9B5CA6352105422300808615 /* Starships.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		9B5CA62421050F5700808615 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				9B5CA62521050F6B00808615 /* JSONDownloader.swift */,
+				9B5CA6272105102F00808615 /* StarWarsAPIError.swift */,
+				9B5CA6292105119A00808615 /* StarWarsAPIClient.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,7 +304,16 @@
 			files = (
 				9B5CA5F9210503A300808615 /* StarWarsAPI.xcdatamodeld in Sources */,
 				9B5CA5F3210503A300808615 /* ViewController.swift in Sources */,
+				9B5CA6282105102F00808615 /* StarWarsAPIError.swift in Sources */,
+				9B5CA62621050F6B00808615 /* JSONDownloader.swift in Sources */,
+				9B5CA62C2105132700808615 /* People.swift in Sources */,
+				9B5CA623210504DB00808615 /* Endpoint.swift in Sources */,
+				9B5CA62E21051CA200808615 /* Person.swift in Sources */,
 				9B5CA5F1210503A300808615 /* AppDelegate.swift in Sources */,
+				9B5CA6362105422300808615 /* Starships.swift in Sources */,
+				9B5CA63021053D5D00808615 /* Vehicle.swift in Sources */,
+				9B5CA63221053DFA00808615 /* Vehicles.swift in Sources */,
+				9B5CA62A2105119A00808615 /* StarWarsAPIClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
