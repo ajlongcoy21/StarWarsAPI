@@ -19,24 +19,44 @@ class ViewController: UIViewController
         // Do any additional setup after loading the view, typically from a nib.
         
         
-        client.searchForPeople()
-        {
-            people, error in
-            
-            guard let people = people else
-            {
-                return
-            }
-            
-            /*for eachPerson in people.allPeople
-            {
-                print(eachPerson.name)
-            }*/
-            
-        }
+
         
+
+        
+
+        
+        
+    }
+
+    override func didReceiveMemoryWarning()
+    {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+
+    @IBAction func CharacterSearch(_ sender: Any)
+    {
+        client.searchForPeople()
+            {
+                people, error in
+                
+                guard let people = people else
+                {
+                    return
+                }
+                
+                for eachPerson in people.allPeople
+                 {
+                 print(eachPerson.name)
+                 }
+                
+        }
+    }
+    
+    @IBAction func VehicleSearch(_ sender: Any)
+    {
         client.searchForVehicles()
-        {
+            {
                 vehicles, error in
                 
                 guard let vehicles = vehicles else
@@ -44,13 +64,16 @@ class ViewController: UIViewController
                     return
                 }
                 
-               /* for eachVehicle in vehicles.allVehicles
-                {
-                    print(eachVehicle.name)
-                }*/
+                for eachVehicle in vehicles.allVehicles
+                 {
+                 print(eachVehicle.name)
+                 }
                 
         }
-        
+    }
+    
+    @IBAction func StarshipSearch(_ sender: Any)
+    {
         client.searchForStarships()
             {
                 starships, error in
@@ -66,16 +89,6 @@ class ViewController: UIViewController
                 }
                 
         }
-        
-        
     }
-
-    override func didReceiveMemoryWarning()
-    {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
 }
 

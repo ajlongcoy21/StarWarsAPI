@@ -57,7 +57,7 @@ class StarWarsClient
     
     func searchForStarships(completion: @escaping (Starships?, StarWarsAPIError?) -> Void)
     {
-        let endpoint = StarWarsAPI.searchStarShips
+        let endpoint = StarWarsAPI.searchStarships
         
         performRequest(with: endpoint)
         {
