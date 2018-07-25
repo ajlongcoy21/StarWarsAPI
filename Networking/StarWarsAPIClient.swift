@@ -76,7 +76,29 @@ class StarWarsClient
         }
     }
     
+    func searchForPlanets(planetNumber: String, completion: @escaping (Planet?, StarWarsAPIError?) -> Void)
+    {
+        let endpoint = StarWarsAPI.searchPlanets(planetNumber: planetNumber)
+        
+        performRequest2(with: endpoint)
+        {
+            results, error in
+            
+            guard let results = results else
+            {
+                completion(nil, error)
+                return
+            }
+            
+            let planet = Planet(json: results)
+            
+            completion(planet, nil)
+            
+        }
+    }
+    
     typealias Results = [[String: Any]]
+    typealias Results2 = [String: Any]
     
     private func performRequest(with endpoint: Endpoint, completion: @escaping (Results?, StarWarsAPIError?) -> Void)
     {
@@ -100,6 +122,30 @@ class StarWarsClient
                     }
                     
                     completion(results, nil)
+            }
+            
+        }
+        
+        task.resume()
+        
+    }
+    
+    private func performRequest2(with endpoint: Endpoint, completion: @escaping (Results2?, StarWarsAPIError?) -> Void)
+    {
+        
+        let task = downloader.jsonTask(with: endpoint.request)
+        {
+            json, error in
+            
+            DispatchQueue.main.async
+            {
+                    guard let json = json else
+                    {
+                        completion(nil, error)
+                        return
+                    }
+                    
+                    completion(json, nil)
             }
             
         }

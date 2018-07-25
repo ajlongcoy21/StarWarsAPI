@@ -12,6 +12,7 @@ class Person
 {
     var name: String
     var born: String
+    var planet: String
     var home: String
     var height: String
     var eye_color: String
@@ -26,5 +27,11 @@ class Person
         self.height = height
         self.eye_color = eye_color
         self.hair_color = hair_color
+        self.planet = ""
+    }
+    
+    func updatePlanet(name: String)
+    {
+        self.planet = name
     }
 }

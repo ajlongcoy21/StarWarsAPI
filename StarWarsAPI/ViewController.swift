@@ -11,21 +11,20 @@ import UIKit
 class ViewController: UIViewController
 {
     
+    @IBOutlet weak var navigationBar: UINavigationItem!
+    
     let client = StarWarsClient()
 
     override func viewDidLoad()
     {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-        
-
-        
-
-        
-
-        
-        
+        self.navigationController?.navigationBar.isHidden = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool)
+    {
+        self.navigationController?.navigationBar.isHidden = true
     }
 
     override func didReceiveMemoryWarning()
@@ -36,21 +35,7 @@ class ViewController: UIViewController
 
     @IBAction func CharacterSearch(_ sender: Any)
     {
-        client.searchForPeople()
-            {
-                people, error in
-                
-                guard let people = people else
-                {
-                    return
-                }
-                
-                for eachPerson in people.allPeople
-                 {
-                 print(eachPerson.name)
-                 }
-                
-        }
+        
     }
     
     @IBAction func VehicleSearch(_ sender: Any)
@@ -89,6 +74,52 @@ class ViewController: UIViewController
                 }
                 
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        self.navigationController?.navigationBar.isHidden = false
+        navigationItem.title = ""
+        
+        if segue.identifier == "ShowPeople"
+        {
+            let peopleViewController = segue.destination as! PeopleViewController
+            let vc = segue.destination as UIViewController
+            vc.navigationItem.title = "Characters"
+            
+            client.searchForPeople()
+            {
+                    people, error in
+                    
+                    guard let people = people else
+                    {
+                        return
+                    }
+                    
+                    for eachPerson in people.allPeople
+                    {
+                        let fullPlanetURL : String = eachPerson.home
+                        let fullPlanetURLArr : [String] = fullPlanetURL.components(separatedBy: "/")
+                        
+                        
+                        self.client.searchForPlanets(planetNumber: fullPlanetURLArr[5])
+                        {
+                            planet, error in
+                            
+                            guard let planet = planet else
+                            {
+                                return
+                            }
+                            
+                            eachPerson.updatePlanet(name: planet.name)
+                            print(eachPerson.planet)
+                            
+                            peopleViewController.people = people.allPeople
+                        }
+                    }
+            }
+        }
+        
     }
 }
 

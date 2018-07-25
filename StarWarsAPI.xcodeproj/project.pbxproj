@@ -24,6 +24,8 @@
 		9B5CA63021053D5D00808615 /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5CA62F21053D5D00808615 /* Vehicle.swift */; };
 		9B5CA63221053DFA00808615 /* Vehicles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5CA63121053DFA00808615 /* Vehicles.swift */; };
 		9B5CA6362105422300808615 /* Starships.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5CA6352105422300808615 /* Starships.swift */; };
+		9BA2100A2108155400D67F68 /* PeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA210092108155400D67F68 /* PeopleViewController.swift */; };
+		9BA2100C2108309F00D67F68 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA2100B2108309F00D67F68 /* Planet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +69,8 @@
 		9B5CA62F21053D5D00808615 /* Vehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
 		9B5CA63121053DFA00808615 /* Vehicles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicles.swift; sourceTree = "<group>"; };
 		9B5CA6352105422300808615 /* Starships.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Starships.swift; sourceTree = "<group>"; };
+		9BA210092108155400D67F68 /* PeopleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleViewController.swift; sourceTree = "<group>"; };
+		9BA2100B2108309F00D67F68 /* Planet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +125,7 @@
 			children = (
 				9B5CA5F0210503A300808615 /* AppDelegate.swift */,
 				9B5CA5F2210503A300808615 /* ViewController.swift */,
+				9BA210092108155400D67F68 /* PeopleViewController.swift */,
 				9B5CA5F4210503A300808615 /* Main.storyboard */,
 				9B5CA5FA210503A400808615 /* Assets.xcassets */,
 				9B5CA5FC210503A400808615 /* LaunchScreen.storyboard */,
@@ -157,6 +162,7 @@
 				9B5CA62F21053D5D00808615 /* Vehicle.swift */,
 				9B5CA63121053DFA00808615 /* Vehicles.swift */,
 				9B5CA6352105422300808615 /* Starships.swift */,
+				9BA2100B2108309F00D67F68 /* Planet.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -308,10 +314,12 @@
 				9B5CA62621050F6B00808615 /* JSONDownloader.swift in Sources */,
 				9B5CA62C2105132700808615 /* People.swift in Sources */,
 				9B5CA623210504DB00808615 /* Endpoint.swift in Sources */,
+				9BA2100A2108155400D67F68 /* PeopleViewController.swift in Sources */,
 				9B5CA62E21051CA200808615 /* Person.swift in Sources */,
 				9B5CA5F1210503A300808615 /* AppDelegate.swift in Sources */,
 				9B5CA6362105422300808615 /* Starships.swift in Sources */,
 				9B5CA63021053D5D00808615 /* Vehicle.swift in Sources */,
+				9BA2100C2108309F00D67F68 /* Planet.swift in Sources */,
 				9B5CA63221053DFA00808615 /* Vehicles.swift in Sources */,
 				9B5CA62A2105119A00808615 /* StarWarsAPIClient.swift in Sources */,
 			);

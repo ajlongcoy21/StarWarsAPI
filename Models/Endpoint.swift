@@ -44,6 +44,7 @@ enum StarWarsAPI
     case searchPeople
     case searchVehicles
     case searchStarships
+    case searchPlanets(planetNumber: String)
     
 }
 
@@ -69,6 +70,8 @@ extension StarWarsAPI: Endpoint
                 return "/api/vehicles/"
             case .searchStarships:
                 return "/api/starships/"
+            case .searchPlanets(planetNumber: let planetNumber):
+                return "/api/planets/\(planetNumber)/"
         }
     }
     
