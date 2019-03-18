@@ -11,11 +11,19 @@ import Foundation
 class People
 {
     var allPeople: [Person]
+    var allPeopleNames: [String] = []
     
     
     init(allPeople: [Person])
     {
         self.allPeople = allPeople
+
+        for eachPerson in allPeople
+        {
+            allPeopleNames.append(eachPerson.name)
+            //print(eachPerson.name)
+            //print(eachPerson.height)
+        }
     }
 }
 

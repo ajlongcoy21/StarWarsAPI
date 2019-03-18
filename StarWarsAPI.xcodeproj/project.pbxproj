@@ -26,6 +26,7 @@
 		9B5CA6362105422300808615 /* Starships.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5CA6352105422300808615 /* Starships.swift */; };
 		9BA2100A2108155400D67F68 /* PeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA210092108155400D67F68 /* PeopleViewController.swift */; };
 		9BA2100C2108309F00D67F68 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA2100B2108309F00D67F68 /* Planet.swift */; };
+		9BA21013210BF73300D67F68 /* VehicleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA21012210BF73300D67F68 /* VehicleViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		9B5CA6352105422300808615 /* Starships.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Starships.swift; sourceTree = "<group>"; };
 		9BA210092108155400D67F68 /* PeopleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleViewController.swift; sourceTree = "<group>"; };
 		9BA2100B2108309F00D67F68 /* Planet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
+		9BA21012210BF73300D67F68 /* VehicleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 				9B5CA5F0210503A300808615 /* AppDelegate.swift */,
 				9B5CA5F2210503A300808615 /* ViewController.swift */,
 				9BA210092108155400D67F68 /* PeopleViewController.swift */,
+				9BA21012210BF73300D67F68 /* VehicleViewController.swift */,
 				9B5CA5F4210503A300808615 /* Main.storyboard */,
 				9B5CA5FA210503A400808615 /* Assets.xcassets */,
 				9B5CA5FC210503A400808615 /* LaunchScreen.storyboard */,
@@ -309,6 +312,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B5CA5F9210503A300808615 /* StarWarsAPI.xcdatamodeld in Sources */,
+				9BA21013210BF73300D67F68 /* VehicleViewController.swift in Sources */,
 				9B5CA5F3210503A300808615 /* ViewController.swift in Sources */,
 				9B5CA6282105102F00808615 /* StarWarsAPIError.swift in Sources */,
 				9B5CA62621050F6B00808615 /* JSONDownloader.swift in Sources */,

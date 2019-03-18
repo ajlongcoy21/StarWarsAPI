@@ -19,12 +19,15 @@ class ViewController: UIViewController
     {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.navigationController?.navigationBar.isHidden = true
+        
+        setupNavBar()
+        self.navigationController?.navigationBar.isHidden = false
     }
+    
     
     override func viewWillAppear(_ animated: Bool)
     {
-        self.navigationController?.navigationBar.isHidden = true
+        self.navigationController?.navigationBar.isHidden = false
     }
 
     override func didReceiveMemoryWarning()
@@ -40,40 +43,12 @@ class ViewController: UIViewController
     
     @IBAction func VehicleSearch(_ sender: Any)
     {
-        client.searchForVehicles()
-            {
-                vehicles, error in
-                
-                guard let vehicles = vehicles else
-                {
-                    return
-                }
-                
-                for eachVehicle in vehicles.allVehicles
-                 {
-                 print(eachVehicle.name)
-                 }
-                
-        }
+
     }
     
     @IBAction func StarshipSearch(_ sender: Any)
     {
-        client.searchForStarships()
-            {
-                starships, error in
-                
-                guard let starships = starships else
-                {
-                    return
-                }
-                
-                for eachStarship in starships.allStarships
-                {
-                    print(eachStarship.name)
-                }
-                
-        }
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
@@ -112,14 +87,64 @@ class ViewController: UIViewController
                             }
                             
                             eachPerson.updatePlanet(name: planet.name)
-                            print(eachPerson.planet)
                             
-                            peopleViewController.people = people.allPeople
+                            peopleViewController.people = people
+                            
                         }
                     }
             }
         }
         
+        if segue.identifier == "ShowVehicles"
+        {
+            let vehicleViewController = segue.destination as! VehicleViewController
+            let vc = segue.destination as UIViewController
+            vc.navigationItem.title = "Vehicles"
+            
+            
+            client.searchForVehicles()
+            {
+                    vehicles, error in
+                    
+                    guard let vehicles = vehicles else
+                    {
+                        return
+                    }
+                
+                    vehicleViewController.vehicleSent = true
+                    vehicleViewController.vehicles = vehicles
+            
+            }
+        }
+        
+        if segue.identifier == "ShowStarships"
+        {
+            let vehicleViewController = segue.destination as! VehicleViewController
+            let vc = segue.destination as UIViewController
+            vc.navigationItem.title = "Starships "
+            
+            
+            client.searchForStarships()
+                {
+                    starships, error in
+                    
+                    guard let starships = starships else
+                    {
+                        return
+                    }
+                    
+                    vehicleViewController.vehicleSent = false
+                    vehicleViewController.starships = starships
+                    
+            }
+        }
+    }
+    
+    func setupNavBar()
+    {
+        self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.lightGray]
+        self.navigationController!.navigationBar.tintColor = UIColor.lightGray
+        self.navigationController!.navigationBar.isTranslucent = false
     }
 }
 

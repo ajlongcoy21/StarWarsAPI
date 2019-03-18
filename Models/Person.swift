@@ -34,4 +34,9 @@ class Person
     {
         self.planet = name
     }
+    
+    func getHeight() -> Double
+    {
+        return Double(height) ?? 0.0
+    }
 }
