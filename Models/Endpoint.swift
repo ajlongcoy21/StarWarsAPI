@@ -8,6 +8,8 @@
 
 import Foundation
 
+//create a protocol endpoit for the SWAPI
+
 protocol Endpoint
 {
     var base: String { get }
@@ -18,9 +20,13 @@ protocol Endpoint
 
 extension Endpoint
 {
+    // define url components in the endpoint
+    
     var urlComponents: URLComponents
     {
 
+        // add the base url and the url path
+        
         var components = URLComponents(string: base)!
         components.path = starWarsAssetSearch
         
@@ -32,6 +38,8 @@ extension Endpoint
     
     var request: URLRequest
     {
+        // create a url request with the components
+        
         let url = urlComponents.url!
         let urlRequest =  URLRequest(url: url)
         
@@ -57,9 +65,7 @@ extension StarWarsAPI: Endpoint
     {
         return "https://swapi.co"
     }
-    
-    
-    
+
     var starWarsAssetSearch: String
     {
         switch self

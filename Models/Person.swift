@@ -10,6 +10,8 @@ import Foundation
 
 class Person
 {
+    // Person variables
+    
     var name: String
     var born: String
     var planet: String
@@ -30,13 +32,31 @@ class Person
         self.planet = ""
     }
     
+    // add the planet to the person
+    
     func updatePlanet(name: String)
     {
         self.planet = name
     }
     
+    // return height in the double format for the person
+    
     func getHeight() -> Double
     {
         return Double(height) ?? 0.0
+    }
+    
+    // return height in metric format as string
+    
+    func getHeightMetricString() -> String
+    {
+        return "\(Double(height)!/100.0) m"
+    }
+    
+    // return height in english format as string
+    
+    func getHeightEnglishString() -> String
+    {
+        return "\(round(Double(height)!/0.3048)/100.0) ft"
     }
 }

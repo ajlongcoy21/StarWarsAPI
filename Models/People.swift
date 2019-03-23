@@ -10,9 +10,12 @@ import Foundation
 
 class People
 {
+    // define variables
+    
     var allPeople: [Person]
     var allPeopleNames: [String] = []
     
+    // init for the class
     
     init(allPeople: [Person])
     {
@@ -29,8 +32,12 @@ class People
 
 extension People
 {
+    // convenience init used to create the people class from data returned in the api request
+    
     convenience init?(json: [[String: Any]])
     {
+        // keys used inthe JSON data
+        
         struct Key
         {
             static let name = "name"
@@ -42,6 +49,8 @@ extension People
         }
         
         var allPeople: [Person] = []
+        
+        // iterate through the people in the JSON data checking to make sure all fields are valid
         
         for eachPerson in json
         {

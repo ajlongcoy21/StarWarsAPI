@@ -10,8 +10,11 @@ import Foundation
 
 class Starships
 {
+    // define variables
+    
     var allStarships: [Vehicle]
     
+    // init for the class
     
     init(allStarships: [Vehicle])
     {
@@ -21,8 +24,12 @@ class Starships
 
 extension Starships
 {
+    // convenience init used to create the starships class from data returned in the api request
+    
     convenience init?(json: [[String: Any]])
     {
+        // keys used inthe JSON data
+        
         struct Key
         {
             static let name = "name"
@@ -34,6 +41,8 @@ extension Starships
         }
         
         var allStarships: [Vehicle] = []
+        
+        // iterate through the starships in the JSON data checking to make sure all fields are valid
         
         for eachStarship in json
         {

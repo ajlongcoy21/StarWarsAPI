@@ -20,14 +20,22 @@ class VehicleViewController: UIViewController
     @IBOutlet weak var smallestVehicleLabel: UILabel!
     @IBOutlet weak var largestVehicleLabel: UILabel!
     @IBOutlet weak var vehiclePickerView: UIPickerView!
+    @IBOutlet weak var englishButton: UIButton!
+    @IBOutlet weak var metricButton: UIButton!
+    @IBOutlet weak var usdButton: UIButton!
+    @IBOutlet weak var creditsButton: UIButton!
     
     
     var vehiclePicker: UIPickerView?
     var count: Int = 0
     var smallest: Double = 0.0
     var largest: Double = 0.0
+    var exchangeValue: Double = -1.0
     
     var vehicleSent: Bool = false
+    
+    var units: Int = 1
+    var money: Int = 1
     
     var vehicles: Vehicles?
     {
@@ -35,8 +43,8 @@ class VehicleViewController: UIViewController
         {
             vehicleNameLabel.text = vehicles?.allVehicles[0].name
             makeLabel.text = vehicles?.allVehicles[0].make
-            costLabel.text = vehicles?.allVehicles[0].cost
-            lengthLabel.text = "\(vehicles?.allVehicles[0].length ?? "0.0")m"
+            costLabel.text = vehicles?.allVehicles[0].getCostCreditsString()
+            lengthLabel.text = vehicles?.allVehicles[0].getLengthMetricString()
             vehicleClassLabel.text = vehicles?.allVehicles[0].vehicleClass
             crewLabel.text = vehicles?.allVehicles[0].crew
             reloadPickerValues()
@@ -78,8 +86,8 @@ class VehicleViewController: UIViewController
         {
             vehicleNameLabel.text = starships?.allStarships[0].name
             makeLabel.text = starships?.allStarships[0].make
-            costLabel.text = starships?.allStarships[0].cost
-            lengthLabel.text = "\(starships?.allStarships[0].length ?? "0.0")m"
+            costLabel.text = starships?.allStarships[0].getCostCreditsString()
+            lengthLabel.text = starships?.allStarships[0].getLengthEnglishString()
             vehicleClassLabel.text = starships?.allStarships[0].vehicleClass
             crewLabel.text = starships?.allStarships[0].crew
             reloadPickerValues()
@@ -121,6 +129,18 @@ class VehicleViewController: UIViewController
         
         vehiclePickerView.dataSource = self
         vehiclePickerView.delegate = self
+        
+        englishButton.tag = 0
+        metricButton.tag = 1
+        
+        usdButton.tag = 0
+        creditsButton.tag = 1
+        
+        metricButton.setTitleColor(UIColor.white, for: .normal)
+        englishButton.setTitleColor(UIColor.gray, for: .normal)
+        
+        creditsButton.setTitleColor(UIColor.white, for: .normal)
+        usdButton.setTitleColor(UIColor.gray, for: .normal)
     }
     
     override func didReceiveMemoryWarning()
@@ -143,6 +163,149 @@ class VehicleViewController: UIViewController
         
         
     }
+    
+    @IBAction func unitSelection(_ sender: UIButton)
+    {
+        if sender.tag == 0 && vehicleSent
+        {
+            units = 0
+            metricButton.setTitleColor(UIColor.gray, for: .normal)
+            englishButton.setTitleColor(UIColor.white, for: .normal)
+            
+            lengthLabel.text = vehicles?.allVehicles[vehiclePickerView.selectedRow(inComponent: 0)].getLengthEnglishString()
+        }
+        else if sender.tag == 0 && !vehicleSent
+        {
+            units = 0
+            metricButton.setTitleColor(UIColor.gray, for: .normal)
+            englishButton.setTitleColor(UIColor.white, for: .normal)
+            
+            lengthLabel.text = starships?.allStarships[vehiclePickerView.selectedRow(inComponent: 0)].getLengthEnglishString()
+        }
+        else if sender.tag == 1 && vehicleSent
+        {
+            units = 1
+            metricButton.setTitleColor(UIColor.white, for: .normal)
+            englishButton.setTitleColor(UIColor.gray, for: .normal)
+            
+            lengthLabel.text = vehicles?.allVehicles[vehiclePickerView.selectedRow(inComponent: 0)].getLengthMetricString()
+        }
+        
+        else
+        {
+            units = 1
+            metricButton.setTitleColor(UIColor.white, for: .normal)
+            englishButton.setTitleColor(UIColor.gray, for: .normal)
+            
+            lengthLabel.text = starships?.allStarships[vehiclePickerView.selectedRow(inComponent: 0)].getLengthMetricString()
+        }
+    }
+    
+    
+    @IBAction func currencySelection(_ sender: UIButton)
+    {
+        if sender.tag == 1 && self.vehicleSent && self.exchangeValue > 0
+        {
+            self.money = 1
+            self.creditsButton.setTitleColor(UIColor.white, for: .normal)
+            self.usdButton.setTitleColor(UIColor.gray, for: .normal)
+            
+            self.costLabel.text = self.vehicles?.allVehicles[self.vehiclePickerView.selectedRow(inComponent: 0)].getCostCreditsString()
+        }
+            
+        else  if sender.tag == 1 && !self.vehicleSent && self.exchangeValue > 0
+        {
+            self.money = 1
+            self.creditsButton.setTitleColor(UIColor.white, for: .normal)
+            self.usdButton.setTitleColor(UIColor.gray, for: .normal)
+            
+            self.costLabel.text = self.starships?.allStarships[self.vehiclePickerView.selectedRow(inComponent: 0)].getCostCreditsString()
+        }
+        
+        else
+        {
+            //Creating UIAlertController and
+            //Setting title and message for the alert dialog
+            let alertController = UIAlertController(title: "Enter Exchange Rate", message: "Enter USD per Credit", preferredStyle: .alert)
+            
+            //the confirm action taking the inputs
+            let confirmAction = UIAlertAction(title: "Enter", style: .default)
+            { (_) in
+
+                //getting the input values from user
+                var userInput = ""
+                userInput = alertController.textFields![0].text!
+                
+                if let exchangeRateInput = Double(userInput)
+                {
+                    self.exchangeValue = exchangeRateInput
+                }
+                else
+                {
+                    self.showExchangeRateError()
+                }
+                
+                if self.exchangeValue == 0
+                {
+                    self.showExchangeRateError()
+                }
+                
+                if sender.tag == 0 && self.vehicleSent && self.exchangeValue > 0
+                {
+                    self.money = 0
+                    self.creditsButton.setTitleColor(UIColor.gray, for: .normal)
+                    self.usdButton.setTitleColor(UIColor.white, for: .normal)
+                    
+                    self.costLabel.text = self.vehicles?.allVehicles[self.vehiclePickerView.selectedRow(inComponent: 0)].getCostUSDString(exchangeRate: self.exchangeValue)
+                }
+                else if sender.tag == 0 && !self.vehicleSent && self.exchangeValue > 0
+                {
+                    self.money = 0
+                    self.creditsButton.setTitleColor(UIColor.gray, for: .normal)
+                    self.usdButton.setTitleColor(UIColor.white, for: .normal)
+                    
+                    self.costLabel.text = self.starships?.allStarships[self.vehiclePickerView.selectedRow(inComponent: 0)].getCostUSDString(exchangeRate: self.exchangeValue)
+                }
+            }
+            
+            //the cancel action doing nothing
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+            { (_) in }
+            
+            //adding textfields to our dialog box
+            alertController.addTextField
+                { (textField) in
+                    textField.placeholder = "Enter Exchange Rate"
+                    textField.keyboardType = UIKeyboardType.decimalPad
+            }
+            
+            //adding the action to dialogbox
+            alertController.addAction(confirmAction)
+            alertController.addAction(cancelAction)
+            
+            //finally presenting the dialog box
+            self.present(alertController, animated: true, completion: nil)
+        }
+        
+    }
+    
+    func showExchangeRateError()
+    {
+        //Creating UIAlertController and
+        //Setting title and message for the alert dialog
+        let alertController = UIAlertController(title: "Exchange Rate", message: "The exchange rate must be a valid number and greater than 0.", preferredStyle: .alert)
+        
+        //the confirm action taking the inputs
+        let confirmAction = UIAlertAction(title: "OK", style: .default)
+        { (_) in }
+        
+        //adding the action to dialogbox
+        alertController.addAction(confirmAction)
+        
+        //finally presenting the dialog box
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     
 }
 
@@ -218,8 +381,26 @@ extension VehicleViewController: UIPickerViewDataSource, UIPickerViewDelegate
         {
             vehicleNameLabel.text = vehicles?.allVehicles[row].name
             makeLabel.text = vehicles?.allVehicles[row].make
-            costLabel.text = vehicles?.allVehicles[row].cost
-            lengthLabel.text = "\(vehicles?.allVehicles[row].length ?? "0.0")m"
+            
+            if money == 0
+            {
+                costLabel.text = vehicles?.allVehicles[row].getCostUSDString(exchangeRate: self.exchangeValue)
+            }
+            else
+            {
+                costLabel.text = vehicles?.allVehicles[row].getCostCreditsString()
+            }
+            
+            
+            if units == 0
+            {
+                lengthLabel.text = vehicles?.allVehicles[row].getLengthEnglishString()
+            }
+            else
+            {
+                lengthLabel.text = vehicles?.allVehicles[row].getLengthMetricString()
+            }
+            
             vehicleClassLabel.text = vehicles?.allVehicles[row].vehicleClass
             crewLabel.text = vehicles?.allVehicles[row].crew
         }
@@ -227,8 +408,25 @@ extension VehicleViewController: UIPickerViewDataSource, UIPickerViewDelegate
         {
             vehicleNameLabel.text = starships?.allStarships[row].name
             makeLabel.text = starships?.allStarships[row].make
-            costLabel.text = starships?.allStarships[row].cost
-            lengthLabel.text = "\(starships?.allStarships[row].length ?? "0.0")m"
+            
+            if money == 0
+            {
+                costLabel.text = starships?.allStarships[row].getCostUSDString(exchangeRate: self.exchangeValue)
+            }
+            else
+            {
+                costLabel.text = starships?.allStarships[row].getCostCreditsString()
+            }
+            
+            if units == 0
+            {
+                lengthLabel.text = starships?.allStarships[row].getLengthEnglishString()
+            }
+            else
+            {
+                lengthLabel.text = starships?.allStarships[row].getLengthMetricString()
+            }
+            
             vehicleClassLabel.text = starships?.allStarships[row].vehicleClass
             crewLabel.text = starships?.allStarships[row].crew
         }

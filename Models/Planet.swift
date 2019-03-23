@@ -10,8 +10,11 @@ import Foundation
 
 class Planet
 {
+    // define variables
+    
     var name: String
     
+    // init for the class
     
     init(name: String)
     {

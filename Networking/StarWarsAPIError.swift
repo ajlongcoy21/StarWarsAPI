@@ -8,6 +8,8 @@
 
 import Foundation
 
+// Enumeration of the errors that are identified for the SWAPI
+
 enum StarWarsAPIError: Int, Error
 {
     case requestFailed = 1
@@ -15,6 +17,8 @@ enum StarWarsAPIError: Int, Error
     case invalidData
     case jsonConversionFailure
     case jsonParsingFailure
+    
+    // The code below adds a string description to the enum value
     
     static var allCases: [String]
     {
@@ -31,6 +35,9 @@ enum StarWarsAPIError: Int, Error
 
 extension StarWarsAPIError: CustomStringConvertible
 {
+    
+    //Creating the error description for each error identified
+    
     var description: String
     {
         switch self

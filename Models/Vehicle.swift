@@ -27,4 +27,47 @@ class Vehicle
         self.vehicleClass = vehicleClass
         self.crew = crew
     }
+    
+    // return the length of the vehile in metric units as string
+    
+    func getLengthMetricString() -> String
+    {
+        return "\(Double(length)!) m"
+    }
+    
+    // return the length of the vehicle in english units as string
+    
+    func getLengthEnglishString() -> String
+    {
+        return "\(round(round(Double(length)!/0.0003048)/1000.0)) ft"
+    }
+    
+    // return the cost of the vehicle from the exchange rate entered by the user
+    
+    func getCostUSDString(exchangeRate: Double) -> String
+    {
+        if cost != "unknown"
+        {
+            return "$\(Double(Double(cost)! * exchangeRate).rounded(toPlaces: 2))"
+        }
+        
+        return cost
+        
+    }
+    
+    func getCostCreditsString() -> String
+    {
+        return cost
+    }
+}
+
+extension Double
+{
+    /// Rounds the double to decimal places value
+    
+    func rounded(toPlaces places:Int) -> Double
+    {
+        let divisor = pow(10.0, Double(places))
+        return (self * divisor).rounded() / divisor
+    }
 }

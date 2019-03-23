@@ -20,11 +20,16 @@ class PeopleViewController: UIViewController
     @IBOutlet weak var starWarsPeoplePicker: UIPickerView!
     @IBOutlet weak var smallestLabel: UILabel!
     @IBOutlet weak var largestLabel: UILabel!
+    @IBOutlet weak var englishButton: UIButton!
+    @IBOutlet weak var metricButton: UIButton!
+    
     
     var peoplePicker: UIPickerView?
     var count: Int = 0
     var smallest: Int = 0
     var largest: Int = 0
+    
+    var units: Int = 1
     
     var people: People?
     {
@@ -33,7 +38,7 @@ class PeopleViewController: UIViewController
             personNameLabel.text = people?.allPeople[0].name
             bornDateLabel.text = people?.allPeople[0].born
             homeLabel.text = people?.allPeople[0].planet
-            heightLabel.text = "\((people?.allPeople[0].getHeight())!/100.0)m"
+            heightLabel.text = people?.allPeople[0].getHeightMetricString()
             eyeColorLabel.text = people?.allPeople[0].eye_color
             hairColorLabel.text = people?.allPeople[0].hair_color
             reloadPickerValues()
@@ -75,6 +80,12 @@ class PeopleViewController: UIViewController
         
         starWarsPeoplePicker.dataSource = self
         starWarsPeoplePicker.delegate = self
+        
+        englishButton.tag = 0
+        metricButton.tag = 1
+        
+        metricButton.setTitleColor(UIColor.white, for: .normal)
+        englishButton.setTitleColor(UIColor.gray, for: .normal)
     }
     
     override func didReceiveMemoryWarning()
@@ -94,9 +105,30 @@ class PeopleViewController: UIViewController
         starWarsPeoplePicker.dataSource = self
         starWarsPeoplePicker.delegate = self
         starWarsPeoplePicker.reloadAllComponents()
+    }
+    
+    @IBAction func unitSelection(_ sender: UIButton)
+    {
+        if sender.tag == 0
+        {
+            units = 0
+            metricButton.setTitleColor(UIColor.gray, for: .normal)
+            englishButton.setTitleColor(UIColor.white, for: .normal)
+            
+            heightLabel.text = people?.allPeople[(starWarsPeoplePicker?.selectedRow(inComponent: 0))!].getHeightEnglishString()
+        }
+        else
+        {
+            units = 1
+            englishButton.setTitleColor(UIColor.gray, for: .normal)
+            metricButton.setTitleColor(UIColor.white, for: .normal)
+            
+            heightLabel.text = people?.allPeople[(starWarsPeoplePicker?.selectedRow(inComponent: 0))!].getHeightMetricString()
+        }
         
         
     }
+    
     
 }
 
@@ -140,10 +172,20 @@ extension PeopleViewController: UIPickerViewDataSource, UIPickerViewDelegate
         personNameLabel.text = people?.allPeople[row].name
         bornDateLabel.text = people?.allPeople[row].born
         homeLabel.text = people?.allPeople[row].planet
-        heightLabel.text = "\((people?.allPeople[row].getHeight())!/100.0)m"
+        
+        if units == 0
+        {
+            heightLabel.text = people?.allPeople[row].getHeightEnglishString()
+        }
+        else
+        {
+            heightLabel.text = people?.allPeople[row].getHeightMetricString()
+        }
+        
         eyeColorLabel.text = people?.allPeople[row].eye_color
         hairColorLabel.text = people?.allPeople[row].hair_color
     }
+    
     
     
     

@@ -10,8 +10,11 @@ import Foundation
 
 class Vehicles
 {
+    // define variables
+    
     var allVehicles: [Vehicle]
     
+    // init for the class
     
     init(allVehicles: [Vehicle])
     {
@@ -21,8 +24,12 @@ class Vehicles
 
 extension Vehicles
 {
+    // convenience init used to create the vehicles class from data returned in the api request
+    
     convenience init?(json: [[String: Any]])
     {
+        // keys used inthe JSON data
+        
         struct Key
         {
             static let name = "name"
@@ -34,6 +41,8 @@ extension Vehicles
         }
         
         var allVehicles: [Vehicle] = []
+        
+        // iterate through the vehicles in the JSON data checking to make sure all fields are valid
         
         for eachVehicle in json
         {
